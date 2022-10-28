@@ -18,7 +18,7 @@ public class Processor {
     }
 
     public void number_of_words() throws IOException {
-        File file = new File("C:/Users/aibek/Documents/Aibek/AITU/Course 3/Trimester 1/Distributed Computing/Code/WebServer/src/first_task/example.txt");
+        File file = new File("../DistributedComputing/src/first_task/example.txt");
         try(Scanner sc = new Scanner(new FileInputStream(file))){
             int count=0;
             while(sc.hasNext()){
@@ -36,10 +36,9 @@ public class Processor {
         System.out.flush();
         PrintWriter output = new PrintWriter(socket.getOutputStream());
 
-        number_of_words();
-
         //different response for different requests
         if (request.getRequestLine().toString().equals("GET /create/item1 HTTP/1.1")) {
+            number_of_words();
             output.println("HTTP/1.1 200 OK");
             output.println("Content-Type: text/html; charset=utf-8");
             output.println();
@@ -87,7 +86,5 @@ public class Processor {
             output.flush();
             socket.close();
         }
-
-        socket.close();
     }
 }
